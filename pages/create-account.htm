@@ -1,0 +1,108 @@
+url = "/"
+layout = "default-front"
+title = "Create-account"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[getDetails]
+==
+<div class="bg"></div>
+<div class="authincation" style="height: 100vh; overflow-x: hidden; overflow-y: scroll;">
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="margin-top: 2.5rem; margin-bottom: 2.5rem;">
+            <div class="col-md-6">
+                <div class="authincation-content mt-2" style="border-radius: 15px; overflow:hidden !important;">
+                    <div class="row no-gutters">
+                        <div class="col-xl-12">
+                            <div class="auth-form">
+                                <div class="text-center mb-3">
+                                    <img src="{{ 'assets/images/logos/logo.png'|theme }}" alt="" width="100px" />
+                                </div>
+                                <h4 class="text-center mb-4">Create your account</h4>
+                                {% flash %}
+                                <div class="alert alert-{{ type == 'error' ? 'danger' : type }}" role="alert">{{ message }}</div>
+                                {% endflash %}
+                                {% if canRegister %}
+                                    <form data-request="onRegister" method="POST" accept-charset="UTF-8" data-request-validate data-request-flash>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Full Name<sup style="color: red;">*</sup></strong></label>
+                                            <input type="text" name="name" class="form-control" placeholder="Name" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="name"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Your Personal National ID Number</strong></label>
+                                            <input type="text" name="nic" class="form-control" placeholder="Your Personal National ID Number" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="nic"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Telephone Number<sup style="color: red;">*</sup></strong></label>
+                                            <input type="text" name="tp" class="form-control" placeholder="Telephone Number" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="tp"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Email<sup style="color: red;">*</sup></strong></label>
+                                            <input type="text" name="email" class="form-control" placeholder="Email" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="email"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Address<sup style="color: red;">*</sup></strong></label>
+                                            <textarea type="text" name="address" class="form-control" placeholder="Address"></textarea>
+                                            <span class="text-danger animated fadeInUp" data-validate-for="address"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Course<sup style="color: red;">*</sup></strong></label>
+                                            <select name="course_id" class="form-control default-select">
+                                                <option disabled selected>Select Your Course</option>
+                                                {% for Course in getDetails.courses %}
+                                                    <option value="{{ Course.id }}">{{ Course.course_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                            <span class="text-danger animated fadeInUp" data-validate-for="course_id"></span>
+                                        </div>
+                                        {% if loginAttribute == 'username' %}
+                                            <div class="form-group">
+                                                <label class="mb-1"><strong>Username<sup style="color: red;">*</sup></strong></label>
+                                                <input type="text" name="username" class="form-control" placeholder="Username" />
+                                                <span class="text-danger animated fadeInUp" data-validate-for="username"></span>
+                                            </div>
+                                        {% endif %}
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Password<sup style="color: red;">*</sup></strong></label>
+                                            <input type="password" name="password" class="form-control" onpaste="return false" placeholder="Password" id="password-input" aria-describedby="passwordInput" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="password"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Confirm Password<sup style="color: red;">*</sup></strong></label>
+                                            <input type="password" name="password_confirmation" class="form-control" id="accountPasswordConfirm" placeholder="Confirm password" />
+                                            <span class="text-danger animated fadeInUp" data-validate-for="password_confirmation"></span>
+                                        </div>
+                                        <div class="form-row d-flex justify-content-between mt-4 mb-2">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox ml-1 checkbox-primary">
+                                                    <input type="checkbox" class="custom-control-input" checked value="1" name="agree" id="basic_checkbox_1" />
+                                                    <label class="custom-control-label" for="basic_checkbox_1">I agree to the Terms and Conditions</label>
+                                                    <span class="text-danger animated fadeInUp" data-validate-for="agree"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="login_type" value="Investor" />
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-block" data-attach-loading>Create account</button>
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <div class="alert alert-warning alert-alt fade show">
+                                        <strong>Warning!</strong> Registration is disabled.
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
